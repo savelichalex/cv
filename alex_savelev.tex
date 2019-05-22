@@ -1,0 +1,204 @@
+\RequirePackage{xifthen}
+
+\documentclass[11pt,a4paper,sans]{awesomecv}
+
+%%\moderncvtheme[blue]{classic}
+
+\usepackage{fontspec}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[unicode]{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour, linkcolor=linkcolour}
+
+\usepackage{enumitem}
+
+\name{Aleksei}{Saveliev}
+\position{Software Developer}
+\address{St. Petersburg, Russia}
+\mobile{+7~911~250~4587}
+\email{savelichalex93@gmail.com}
+\github{savelichalex}
+
+\begin{document}
+\makecvheader[C]
+
+\cvsection{Key areas of expertise}
+\begin{cvitems}
+\item{Cross-platform mobile applications (ReactNative);}
+\item{Web frontend development;}
+\item{Developer experience improvement (built systems, CI, tests).}
+\end{cvitems}
+
+\cvsection{Technical Skills}
+\begin{cvitems}
+\item{Languages: JavaScript, TypeScript, ClojureScript, Objective-C, Java, Bash}
+\item{VCS: Git}
+\item{OS: OS X, iOS, Android}
+\item{Tools: Emacs, Xcode, Android Studio}
+\end{cvitems}
+
+\renewcommand*{\entrypositionstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\renewcommand*{\entrydatestyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
+\newcommand*{\entryemployerstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\bfseries\color{graytext} #1}}
+\newcommand*{\entryurlstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{graytext} #1}}
+\newcommand*{\entrydescriptionstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\upshape\color{text} #1}}
+% {position}{date}{employer}{url}{description}
+\renewcommand*{\cventry}[5]{
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l r}
+    \entrypositionstyle{#1} & \entrydatestyle{#2} \\
+    \entryemployerstyle{#3} & \entryurlstyle{\url{#4}} \\
+    \multicolumn{2}{L{\textwidth}}{
+      \entrydescriptionstyle{#5}
+    }
+  \end{tabular*}
+}
+
+\newenvironment{cvprojects}[1] {%
+  \ifthenelse{\equal{#1}{}}{
+    \begin{description}[
+      itemindent=0em,
+      labelwidth=0em,
+      labelsep=0em,
+      leftmargin=0em,
+      parsep=1ex
+    ]
+  }{
+    \begin{description}[
+      itemindent=0em,
+      labelwidth=0em,
+      labelsep=0em,
+      leftmargin=0em,
+      parsep=1ex,
+      topsep=#1
+    ]
+  }
+}{%
+  \end{description}
+}
+
+% {title}
+% {url}
+% {short description}
+% {technologies}
+% {description}
+\newcommand{\cvproject}[5]{%
+  \ifthenelse{\equal{#1}{}}{}{\textbf{#1}\newline{}\vspace{0.5ex}}
+  \ifthenelse{\equal{#2}{}}{}{\url{#2}\newline{}}
+  \ifthenelse{\equal{#3}{}}{}{#3\newline{}}
+  \noindent\emph{Technologies - #4.}
+  \ifthenelse{\equal{#5}{}}{}{\newline{}#5}
+}
+
+\cvsection{Experience}
+\begin{cventries}
+\cventry
+    {Software developer}
+    {Jan 2018 - Present}
+    {EPAM Systems, St. Petersburg, Russia}
+    {https://epam.com}
+    {
+      Multiple projects:\newline
+      \begin{cvprojects}{1ex}
+      \item \cvproject
+          {PoC of mobile apllication to work with bluetooth devices (tonometrs and pill devices).}
+          {}{}
+          {ReactNative, JavaScript}
+          {Finished an existed application to present to customer.}
+      \item \cvproject
+          {PoC of mobile application for medical researches.}
+          {}{}
+          {ReactNative, JavaScript}
+          {Maintained existed application to present to customers.}
+      \item \cvproject
+          {myPH, miHP}
+          {https://itunes.apple.com/ch/app/myph/id1438106777}
+          {Mobile applications to monitor clients medication.}
+          {ReactNative, TypeScript, Fastlane, Objective-C, Java}
+          {
+            Have been developing an applications with shared codebase for iOS and Android.
+            Responsible for full development cycle, from estimations to presentation to customer.
+            Negotiated with customers about features and presented results of development.
+            Had been maintaining CI (Jenkins) and constantly had been improving our build system to easily get new builds.
+            Most of the time I was the only developer due to restricted budget.
+          }
+      \end{cvprojects}
+    }
+\cventry
+    {Frontend software developer}
+    {Jul 2016 - Dec 2018}
+    {OOO "CNS", Moscow, Russia (remote position)}
+    {https://domclick.ru}
+    {
+      \cvproject
+          {Mortgage service}
+          {}
+          {The main idea behind the project was to reduce offline effort for a client to get a mortgage.}
+          {JavaScript (React, Redux), Docker}
+          {
+            Developed frontend part of \url{https://ipoteka.domclick.ru}.
+            Worked on one of agile teams.
+            Was responsible for full developing cycle, from estimations to delivery.
+            My biggest achievement is frequent releases (at some point it was even
+            every day, but mostly few times a week).
+            Worked tightly with QA engineers as quality of my part was one of my direct responsibilites.
+          }
+    }
+\cventry
+    {Frontend software developer}
+    {Jun 2015 - Jun 2016}
+    {Calvera, St. Petersburg, Russia}
+    {http://calvera.su}
+    {
+      Multiple projects:\newline
+      \begin{cvprojects}{1ex}
+        \item \cvproject
+            {Real estate search service}
+            {}
+            {The service was built around idea of detailed view of real estates with detailed description, lots of photos and planes.}
+            {JavaScript (backbone, marionette, virtual-dom)}
+            {
+              I was working on key area of project - detailed vew of real estate object,
+              created almost all functionality on frontend side for this page.
+              Worked with junior developers at different time of project(?).
+              Setted up environment for team (build system and etc.).
+            }
+        \item \cvproject
+            {Book reader}
+            {}
+            {Our owner had book and wanted to have an mobile application for it.}
+            {ReactNative, ClojureScript}
+            {Built a complete application for iPad.}
+      \end{cvprojects}
+    }
+\cventry
+    {Junior software developer}
+    {Jan 2014 - April 2014}
+    {ICreative, Omsk, Russia}{}
+    {
+      \cvproject
+          {}{}{}
+          {JavaScript, PHP}
+          {
+            Worked in a small outsource team.
+            Helped senior collegues with maintaining existed projects and develop new ones.
+            Learned to work with JS and PHP. Was trying to solve tasks myself under supervision of team-lead.
+          }
+    }
+\end{cventries}
+
+\cvsection{Education}
+\cvsubsection{University}
+\begin{cventries}
+\cventry
+    {Engineer}
+    {Irkutsk State University of Railway Transportation}
+    {}
+    {Sep 2009 - Jun 2014}
+    {}
+\end{cventries}
+
+\end{document}
