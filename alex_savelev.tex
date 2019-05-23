@@ -6,6 +6,16 @@
 
 \usepackage{fontspec}
 
+\newfontfamily\cambria[
+  Path=fonts/,
+  UprightFont=*-Regular,
+  ItalicFont=*-Italic,
+  BoldFont=*-Bold,
+  BoldItalicFont=*-BoldItalic,
+]{Cambria}
+
+%\renewcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\cambria\bfseries\color{text}\@sectioncolor #1}}
+
 \usepackage[utf8]{inputenc}
 
 \usepackage[unicode]{hyperref}
@@ -24,31 +34,58 @@
 \begin{document}
 \makecvheader[C]
 
+\let\bodyfont\cambria
+
+\newcommand{\cvlistitem}[1]{\item {\fontsize{12pt}{1em}\bodyfont\upshape\color{darktext} #1}}
+\newenvironment{cvlist}{
+  \begin{description}[
+      itemindent=0em,
+      labelwidth=0em,
+      labelsep=0em,
+      leftmargin=0em,
+      parsep=1ex
+    ]
+}{
+  \end{description}
+}
+
+\newcommand{\cvdescriptionitem}[2]{\item[{\fontsize{12pt}{1em}\bodyfont\bfseries\color{darktext} #1}] {\fontsize{12pt}{1em}\cambria\upshape\color{darktext} #2}}
+\newenvironment{cvdescription}{
+  \begin{description}[
+      parsep=1ex,
+    ]
+}{
+  \end{description}
+}
+
 \cvsection{Key areas of expertise}
-\begin{cvitems}
-\item{Cross-platform mobile applications (ReactNative);}
-\item{Web frontend development;}
-\item{Developer experience improvement (built systems, CI, tests).}
-\end{cvitems}
+\begin{cvlist}
+\cvlistitem{Cross-platform mobile applications (ReactNative)}
+\cvlistitem{Web frontend development}
+\cvlistitem{Developer experience improvement (built systems, CI, tests)}
+\end{cvlist}
 
 \cvsection{Technical Skills}
-\begin{cvitems}
-\item{Languages: JavaScript, TypeScript, ClojureScript, Objective-C, Java, Bash}
-\item{VCS: Git}
-\item{OS: OS X, iOS, Android}
-\item{Tools: Emacs, Xcode, Android Studio}
-\end{cvitems}
+\begin{cvdescription}
+\cvdescriptionitem{Languages}{JavaScript, TypeScript, ClojureScript, Objective-C, Java, Bash}
+\cvdescriptionitem{VCS}{Git}
+\cvdescriptionitem{OS}{OS X, iOS, Android}
+\cvdescriptionitem{Development tools}{Emacs, Xcode, Android Studio}
+\end{cvdescription}
 
-\renewcommand*{\entrypositionstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\renewcommand*{\entrydatestyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
-\newcommand*{\entryemployerstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\bfseries\color{graytext} #1}}
-\newcommand*{\entryurlstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{graytext} #1}}
-\newcommand*{\entrydescriptionstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\upshape\color{text} #1}}
+\renewcommand*{\entrypositionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\renewcommand*{\entrydatestyle}[1]{{\fontsize{11pt}{1em}\bodyfont\slshape\color{graytext} #1}}
+\newcommand*{\entryemployerstyle}[1]{{\fontsize{11pt}{1em}\bodyfont\bfseries\color{graytext} #1}}
+\newcommand*{\entryurlstyle}[1]{{\fontsize{11pt}{1em}\bodyfont\upshape\color{graytext} #1}}
+\newcommand*{\entrydescriptionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\upshape\color{text} #1}}
+
 % {position}{date}{employer}{url}{description}
 \renewcommand*{\cventry}[5]{
   \setlength\tabcolsep{0pt}
-  \setlength{\extrarowheight}{0pt}
+  \setlength{\extrarowheight}{1ex}
+  %\setlength\topsep{-1ex}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l r}
+    \noalign{\vspace{-2ex}}
     \entrypositionstyle{#1} & \entrydatestyle{#2} \\
     \entryemployerstyle{#3} & \entryurlstyle{\url{#4}} \\
     \multicolumn{2}{L{\textwidth}}{
@@ -86,10 +123,10 @@
 % {technologies}
 % {description}
 \newcommand{\cvproject}[5]{%
-  \ifthenelse{\equal{#1}{}}{}{\textbf{#1}\newline{}\vspace{0.5ex}}
-  \ifthenelse{\equal{#2}{}}{}{\url{#2}\newline{}}
-  \ifthenelse{\equal{#3}{}}{}{#3\newline{}}
-  \noindent\emph{Technologies - #4.}
+  \ifthenelse{\equal{#1}{}}{}{\textbf{#1}\newline{}\vspace{1ex}}
+  \ifthenelse{\equal{#2}{}}{}{\url{#2}\newline{}\vspace{0.8ex}}
+  \ifthenelse{\equal{#3}{}}{}{#3\newline{}\vspace{0.8ex}}
+  \noindent\emph{Technologies - #4.}\vspace{0.8ex}
   \ifthenelse{\equal{#5}{}}{}{\newline{}#5}
 }
 
@@ -102,9 +139,9 @@
     {https://epam.com}
     {
       Multiple projects:\newline
-      \begin{cvprojects}{1ex}
+      \begin{cvprojects}{0.8ex}
       \item \cvproject
-          {PoC of mobile apllication to work with bluetooth devices (tonometrs and pill devices).}
+          {PoC of mobile application to work with bluetooth devices (tonometrs and pill devices).}
           {}{}
           {ReactNative, JavaScript}
           {Finished an existed application to present to customer.}
@@ -139,7 +176,7 @@
           {The main idea behind the project was to reduce offline effort for a client to get a mortgage.}
           {JavaScript (React, Redux), Docker}
           {
-            Developed frontend part of \url{https://ipoteka.domclick.ru}.
+            Developed frontend part of \href{http://ipoteka.domclick.ru}{ipoteka.domclick.ru}.
             Worked on one of agile teams.
             Was responsible for full developing cycle, from estimations to delivery.
             My biggest achievement is frequent releases (at some point it was even
@@ -154,7 +191,7 @@
     {http://calvera.su}
     {
       Multiple projects:\newline
-      \begin{cvprojects}{1ex}
+      \begin{cvprojects}{0.8ex}
         \item \cvproject
             {Real estate search service}
             {}
@@ -179,6 +216,8 @@
     {Jan 2014 - April 2014}
     {ICreative, Omsk, Russia}{}
     {
+      Multiple projects\newline
+      \vspace{0.8ex}
       \cvproject
           {}{}{}
           {JavaScript, PHP}
@@ -194,10 +233,10 @@
 \cvsubsection{University}
 \begin{cventries}
 \cventry
-    {Engineer}
     {Irkutsk State University of Railway Transportation}
-    {}
     {Sep 2009 - Jun 2014}
+    {Engineer}
+    {}
     {}
 \end{cventries}
 
